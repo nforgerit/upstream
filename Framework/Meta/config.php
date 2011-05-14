@@ -33,22 +33,27 @@ $config = array(
 		"View"	=>	array(
 			"name"	=>	"View",
 			"file"	=>	CMS_ROOT."/Framework/Classes/Mvc/View/View.php",  
-		),     
+		),  
+		"Config"	=>	array(
+			"name"	=>	"Config",
+			"file"	=>	CMS_ROOT."/Framework/Classes/Utility/Config.php",  
+			"singleton"	=>	"true",	
+		),   
 	),
-	"meta"	=>	array(
-		"defaultModule"		=>	"default",
-		"defaultController"	=>	"index",
-		"defaultAction"		=>	"index",
+	"defaultRoute"	=>	array(
+		"module"		=>	"default",
+		"controller"	=>	"index",
+		"action"		=>	"index",
 	),
 	"modules"	=>	array(
-		"1"	=>	array(
+		"default"	=>	array(
 			"name"	=>	"default",
 			"allowOverwriteRoutes"	=>	true,
 		),                                  
-		"2"	=>	array(
-			"name"	=>	"blog",
-			"allowOverwriteRoutes"	=>	false,
-		),
+		// "blog"	=>	array(
+		// 	"name"	=>	"blog",
+		// 	"allowOverwriteRoutes"	=>	false,
+		// ),  
 	),
 );
   

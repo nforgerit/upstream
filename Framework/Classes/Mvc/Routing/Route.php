@@ -9,11 +9,11 @@ class Route {
 	private $_requestParams;
 	
 	public function __construct($routeConfig) {  	
-		if (! isset($routeConfig["routePattern"])) {     
+		if (! isset($routeConfig["pattern"])) {     
 			throw new Exception("Configuration Error: Route pattern not set.");
 		}      
 		
-		$this->_pattern = $routeConfig["routePattern"];     
+		$this->_pattern = $routeConfig["pattern"];     
 	}
 
 	public function matches($query) {

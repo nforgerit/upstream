@@ -34,27 +34,36 @@ class Framework_Classes_Bootstrap_Bootstrap {
 		Starts the MVC process
 	 */
 	public function startMvc() {       
-		$this->_initAutoloader();		              
+		$this->_initAutoloader();  
+		$this->_initGlobalConfig();  	              
 		
 		$GLOBALS["L"]->load("dispatcher");
-		$this->_dispatcher = Dispatcher::getInstance()->init();  	 
+		$this->_dispatcher = Dispatcher::getInstance()
+			->init();  	 
 
 	}           
 	
 	private function _initAutoloader() {
 		include_once(CMS_ROOT."/Framework/Classes/Utility/Autoloader.php");
-		$GLOBALS["L"] = Framework_Classes_Utility_Autoloader::getInstance();  
-		
-		foreach ($this->_config["classes"] as $key => $value) {
-			$this->_config["classes"][$key] = str_replace("CMS_ROOT", CMS_ROOT, $value);
-		}
-		
+		$GLOBALS["L"] = Autoloader::getInstance(); 
 		if (isset($this->_config)) {
 			$GLOBALS["L"]->injectClasses($this->_config["classes"]);
-		}          
+		}
 		
 		return self::$_instance;
-	}
+	}               
+	
+	private function _initGlobalConfig() {   
+		
+		$GLOBALS["L"]->load("config");              
+		$GLOBALS["C"] = Config::getInstance();
+		
+		if (isset($this->_config)) {
+			$GLOBALS["C"]->injectConfig($this->_config);
+		}
+			   		
+		return self::$_instance;
+   	}
 	
 	/**
 		Utility function for parsing .ini config files

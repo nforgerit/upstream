@@ -1,6 +1,8 @@
 <?php
 
-class Dispatcher {
+class Dispatcher {        
+	
+	private $_modules;
 
 	private $_request;
 	private $_response;
@@ -43,6 +45,16 @@ class Dispatcher {
 			$this->getRequest()
 		);           
 
+	}               
+		
+	public function injectModules($modules) {
+	
+		return self::$_instance;
+	}             
+	
+	public function injectDefaultRoutes($routes) {
+
+		return self::$_instance;
 	}
 
 	public function getRequest() {

@@ -26,6 +26,12 @@ class IndexController extends AbstractActionController {
 		echo "In HelloMotoAction";
 		echo "<pre>";
 		var_dump ($params);
+		echo "</pre>";                
+		
+		echo "<pre>";
+			var_dump($GLOBALS["C"]->getConfigSection("defaultRoute"));
+			die("died in ".__METHOD__." -- line ".__LINE__);
 		echo "</pre>";
+		
 	}
 }

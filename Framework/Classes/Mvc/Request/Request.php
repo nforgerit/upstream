@@ -43,18 +43,18 @@ class Request {
 	private function _process() {	    
 		$GLOBALS["L"]->load("router");
 		$router = new Router;
-		
-		$this->_requestParams = $router->matchQuery($this->uri());   
+		                        
+		$this->_requestParams = $router->matchQuery($this->uri());
 		
 		// DEFAULT ROUTE HANDLING: 
 		// if (empty($this->_requestParams)) {
 		// 			$this->_requestParams = $router->getDefaultRoute();
 		// 		} 
-		
+		                                               
 		$this->_isRouteValid() ?: $this->make404();
 	}                                
 	
-	private function _isRouteValid() {
+	private function _isRouteValid() {       		
 		if (! file_exists(CMS_ROOT."modules/{$this->module()}/controllers/{$this->controller()}.php")) return false;
 		include_once(CMS_ROOT."modules/{$this->module()}/controllers/{$this->controller()}.php");   
 		

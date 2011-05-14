@@ -1,6 +1,6 @@
 <?php
 
-class Framework_Classes_Utility_Autoloader {
+class Autoloader {
 	
 	private $_classes;  
 	
