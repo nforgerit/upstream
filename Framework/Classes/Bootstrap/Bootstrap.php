@@ -54,8 +54,7 @@ class Framework_Classes_Bootstrap_Bootstrap {
 	}               
 	
 	private function _initGlobalConfig() {   
-		
-		$GLOBALS["L"]->load("config");              
+		include_once(CMS_ROOT."/Framework/Classes/Utility/Config.php");
 		$GLOBALS["C"] = Config::getInstance();
 		
 		if (isset($this->_config)) {
@@ -70,7 +69,7 @@ class Framework_Classes_Bootstrap_Bootstrap {
 		@param	String	$filepath
 		@return Array
 	 */
-	private static function parseConfigFile($filepath) {
+	public static function parseConfigFile($filepath) {
 		if (preg_match("/.*(.ini)$/i", $filepath)) {
 			return parse_ini_file($filepath, true);                
 		}        

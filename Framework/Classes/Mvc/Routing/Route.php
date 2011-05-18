@@ -9,11 +9,12 @@ class Route {
 	private $_requestParams;
 	
 	public function __construct($routeConfig) {  	
-		if (! isset($routeConfig["pattern"])) {     
+		if (! isset($routeConfig)) {     
 			throw new Exception("Configuration Error: Route pattern not set.");
 		}      
-		
-		$this->_pattern = $routeConfig["pattern"];     
+
+		$this->_pattern = $routeConfig["pattern"];
+		$this->_requestParams = $routeConfig["requestParams"];
 	}
 
 	public function matches($query) {
@@ -21,10 +22,13 @@ class Route {
 		// whether the given query matches this routeObject    
 		
 		// 1) match uri divisions 
-		if (substr_count($query, '/') !== substr_count($this->_pattern, '/')) return false;
+		if (substr_count($query, '/') !== substr_count($this->_pattern, '/')) {
+			return false;
+		}
 		
 		// 2) match each division from left to right
-       	return $this->_matchSubparts($query, $this->_pattern);
+       	return $this->_matchSubparts($query);
+
 	}
 
 	public function requestParams() {
@@ -34,7 +38,8 @@ class Route {
 		return $this->_requestParams;
 	}           
 	
-	private function _matchSubparts($query, $pattern) {
+	private function _matchSubparts($query) {
+		// pre-defined types
 		$REGEX_TYPES = array(
 			":module"	=>	"/^[a-zA-Z][a-zA-Z0-9]+$/",
 			":controller"=>	"/^[a-zA-Z][a-zA-Z0-9]+$/",  
@@ -42,23 +47,32 @@ class Route {
 			":integer"	=>	"/^[1-9][0-9]+$/",
 			":boolean"	=>	"/^(true|false)$/",
 		);
-		
-		$queryDivisions = explode('/', $query);
-		$patternDivisions = explode('/', $pattern);   
-		                             
-		// remove first array element, since they are always empty
-		array_shift($queryDivisions);
-		array_shift($patternDivisions);     
-				
-		while (count($queryDivisions) > 0) {
-			$pq = array_shift($queryDivisions);
-			$pp = array_shift($patternDivisions);
 
-			if (! preg_match($REGEX_TYPES[$pp], $pq)) { return false; }
+		$queryDivisions = explode('/', trim($query, '/'));
+		$patternDivisions = explode('/', trim($this->_pattern, '/'));   
+
+		while (count($queryDivisions) > 0 && count($patternDivisions) > 0) {
+			$qDiv = array_shift($queryDivisions);
+			$pDiv = array_shift($patternDivisions);
+
+			// skip if pDiv is a constant
+			if (substr($pDiv, 0, 1) !== ":") continue;
+
+			// use pre-defined patterns from above
+			if (in_array($pDiv, array_keys($REGEX_TYPES))) {
+				$_pattern = $REGEX_TYPES[$pDiv];
+			}
+			// use the module's defined regexp patterns
+			else if (in_array($pDiv, array_keys($this->_requestParams['params']))) {
+				$_pattern = $this->_requestParams['params'][$pDiv];
+			}
+
+			// match the pattern and collect given params
+			if (! preg_match($_pattern, $qDiv)) { return false;	}
 			else {
-				$this->_requestParams[substr($pp,1)] = $pq;
+				$this->_requestParams[substr($pDiv,1)] = $qDiv;
 			} 
-		}                         
+		}
 		
 		return true;
 	}

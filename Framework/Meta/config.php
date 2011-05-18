@@ -50,10 +50,10 @@ $config = array(
 			"name"	=>	"default",
 			"allowOverwriteRoutes"	=>	true,
 		),                                  
-		// "blog"	=>	array(
-		// 	"name"	=>	"blog",
-		// 	"allowOverwriteRoutes"	=>	false,
-		// ),  
+		 "blog"	=>	array(
+			"name"	=>	"blog",
+			"allowOverwriteRoutes"	=>	false,
+		),  
 	),
 );
   

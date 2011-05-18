@@ -1,7 +1,7 @@
 <?php
 $GLOBALS["L"]->load("abstractPageController");
 
-class IndexController extends AbstractPageController {
+class IndexController extends AbstractActionController {
 
 	public $var1 = 'hello';
 	public $var2 = "moto";
@@ -16,6 +16,8 @@ class IndexController extends AbstractPageController {
 	
 	public function indexAction($params) {
 		echo "HOORAY!! WE'RE IN INDEX ACTION!";
+		
+		echo "This is my fancy new blog entry. YEAH!";
 
 		echo "<pre>";
 		var_dump ($params);

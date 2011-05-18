@@ -1,4 +1,4 @@
 <?php
 
-class AbstractActionController {
+class AbstractPageController {
 }

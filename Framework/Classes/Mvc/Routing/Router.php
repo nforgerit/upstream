@@ -40,16 +40,18 @@ class Router {
 			"controller"	=>	isset($this->_defaultRoute['controller']) ? $this->_defaultRoute['controller'] : "index",	
 			"action"		=>	isset($this->_defaultRoute['action']) ? $this->_defaultRoute['action'] : 'index',	
 		);             		
+
 	}           
 	
 	public function getDefaultRoute() {
 		return $this->_defaultRoute;
 	}
-
-	public function matchQuery($query) { 		 
-		foreach (array_shift($this->_routes) as $route_id => $route) {              
-			if ($route->matches($query)) {  
-				return $route->requestParams();
+	
+	public function matchQuery($query) {
+		foreach ($this->_routes as $route) {
+			$a = array_pop($route);
+			if ($a->matches($query)) {
+				return $a->requestParams();
 			}
 		}
 	}

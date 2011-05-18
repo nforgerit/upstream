@@ -5,11 +5,33 @@ $config = array(
 		"action"		=>	"hellomoto",
 	),                                 
 	"routes"	=> array(
-		"route1"	=>	array(
+		"standard"	=>	array(
 			"pattern"	=>	"/:module/:controller/:action",
+			"requestParams"	=>	array(
+				'module'        => ':module',
+				'controller'    => ':controller',
+				'action'        => ':action',
+				'params'        => array(),
+			"source"	=>	__FILE__,
+			),
 		),
-		"route2"	=>	array(
-			"pattern"	=>	"/:module/:controller",
+		"short_version"	=>	array(
+			"pattern"	=>	"/default",
+			"requestParams"	=>	array(
+				"module"		=>	"default",
+				"controller"	=>	"index",
+				"action"		=>	"index",
+				"params"		=>	array(),
+			"source"	=>	__FILE__,
+			),
 		),
 	),
 );
+
+/*
+ pattern => /blog/list/#current
+ pattern => /blog/list/#first
+ pattern => /blog/list/#current-13
+ pattern => /blog/fancy-name-of-blog-entry
+*/
+ 

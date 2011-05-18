@@ -46,11 +46,10 @@ class Request {
 		                        
 		$this->_requestParams = $router->matchQuery($this->uri());
 		
-		// DEFAULT ROUTE HANDLING: 
-		// if (empty($this->_requestParams)) {
-		// 			$this->_requestParams = $router->getDefaultRoute();
-		// 		} 
-		                                               
+		if ($this->uri() == "/" && !isset($this->_requestParams)) {
+			$this->_requestParams = $router->getDefaultRoute();
+		}                   
+		                             
 		$this->_isRouteValid() ?: $this->make404();
 	}                                
 	
