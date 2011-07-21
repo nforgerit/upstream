@@ -2,11 +2,23 @@ Welcome to myCMS %%%PROGRAM_VERSION%%% by Nicolas Forgerit. (c) 2011
 
 CONTENTS	
 * Jeez! Yet another PHP-based CMS
-- for my own purpose
+- primarily for my own purposes
 - for educational curiosity
 - as a reference of my e1337-skill0rz
-- send me a postcard if you use it and like it. if not, go away and use
-  TYPO3.
+- low requirements on the server: PHP5 is sufficient
+- put away bureaucracy: GOOD naming instead of speaking naming; no
+  namespaces; you deserve the right to shoot yourself into your own feet;
+- important (thus often used) things should be global and shortly
+  accessible:
+  - class loader
+  - configuration holder
+- some nice tools used: Dep.Inj., TDD, Routes, Modularization, Factories  
+- almost no backend for administration (it's a plus!): interact via REST
+- send me a postcard if you use it and like it. if not, go away and
+  better use the good leviathan TYPO3. 
+- cli-based rapid development tool
+- test-driven developed & highly covered 
+- nice integration possibilities with FLOW3, Doctrine2 and ZF
 * The Framework's Modules
 - general Module structure
 - Module-specific configuration

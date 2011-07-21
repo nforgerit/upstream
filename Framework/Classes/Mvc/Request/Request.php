@@ -6,9 +6,8 @@ class Request {
 	private $_requestParams;
 	
 	public function __construct() {
-		// current pattern is: /module/controller/action
-		$this->_requestUri = $_SERVER['REQUEST_URI'];
-		$this->_process();
+		$this->_requestUri = $_SERVER['REQUEST_URI'];    
+		$this->_process();                                                            
 	}
 
 	public function uri() {
@@ -44,23 +43,27 @@ class Request {
 		$GLOBALS["L"]->load("router");
 		$router = new Router;
 		                        
-		$this->_requestParams = $router->matchQuery($this->uri());
-		
+		$this->_requestParams = $router->matchQuery($this->uri());  
+
 		if ($this->uri() == "/" && !isset($this->_requestParams)) {
-			$this->_requestParams = $router->getDefaultRoute();
+			$this->_requestParams = $router->getDefaultRoute(); 
 		}                   
 		                             
 		$this->_isRouteValid() ?: $this->make404();
 	}                                
 	
 	private function _isRouteValid() {       		
-		if (! file_exists(CMS_ROOT."modules/{$this->module()}/controllers/{$this->controller()}.php")) return false;
-		include_once(CMS_ROOT."modules/{$this->module()}/controllers/{$this->controller()}.php");   
+		if (! file_exists(CMS_ROOT."/modules/{$this->module()}/controllers/{$this->controller()}.php")) return false;
+		include_once(CMS_ROOT."/modules/{$this->module()}/controllers/{$this->controller()}.php");   
 		
 		$controllerClass = "{$this->controller()}";
 		$obj = new $controllerClass; 	
 		if (method_exists($obj, $this->action()))
 			return true; 
+	}         
+	
+	private function _normalizeRequestUri($uri) {		
+		return "/".trim($uri, "/")."/";
 	}
 
 

@@ -5,7 +5,8 @@ $config = array(
 		"action"		=>	"hellomoto",
 	),                                 
 	"routes"	=> array(
-		"standard"	=>	array(
+		"standard"	=>	array(    
+			"priority"	=>	0,
 			"pattern"	=>	"/:module/:controller/:action",
 			"requestParams"	=>	array(
 				'module'        => ':module',
@@ -15,7 +16,8 @@ $config = array(
 			"source"	=>	__FILE__,
 			),
 		),
-		"short_version"	=>	array(
+		"short_version"	=>	array(         
+			"priority"	=>	0,
 			"pattern"	=>	"/default",
 			"requestParams"	=>	array(
 				"module"		=>	"default",

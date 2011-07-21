@@ -1,7 +1,7 @@
 <?php
-$GLOBALS["L"]->load("abstractPageController");
+//$GLOBALS["L"]->load("abstractPageController");
 
-class IndexController extends AbstractPageController {
+class IndexController {
 
 	public $var1 = 'hello';
 	public $var2 = "moto";

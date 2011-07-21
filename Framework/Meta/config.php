@@ -1,6 +1,5 @@
 <?php
-
-$config = array(
+return array(
 	"classes"	=> array(
 		"Dispatcher"	=>	array(
 			"name"	=>	"Dispatcher",

@@ -12,11 +12,11 @@ class Router {
 		$GLOBALS["L"]->load("route");
 		
 		$this->_defaultRoute = $GLOBALS["C"]->getConfigSection("defaultRoute");
-		$REGISTERED_MODULES = $GLOBALS["C"]->getConfigSection("modules");       
+		$REGISTERED_MODULES = $GLOBALS["C"]->getConfigSection("modules");     
         
 		foreach ($REGISTERED_MODULES as $module) {     
 			$moduleName = lcfirst($module['name']);
-			include_once(CMS_ROOT."Modules/{$moduleName}/config.php");
+			include_once(CMS_ROOT."/Modules/{$moduleName}/config.php");
 			
 			if ($module["allowOverwriteRoutes"] === "true") {
 				if (isset($module['defaultRoute']['controller']))
@@ -30,7 +30,7 @@ class Router {
 			}                      
 			
 			foreach ($config['routes'] as $routeConfig) {  				
-				$this->_routes[lcfirst($module['name'])][] = new Route($routeConfig);
+				$this->_routes[] = new Route($routeConfig);
 			}			                  
 		}               
               
@@ -39,7 +39,7 @@ class Router {
 			"module"		=>	isset($this->_defaultRoute['module']) ? $this->_defaultRoute['module'] : "default",	
 			"controller"	=>	isset($this->_defaultRoute['controller']) ? $this->_defaultRoute['controller'] : "index",	
 			"action"		=>	isset($this->_defaultRoute['action']) ? $this->_defaultRoute['action'] : 'index',	
-		);             		
+		);   
 
 	}           
 	
@@ -47,11 +47,13 @@ class Router {
 		return $this->_defaultRoute;
 	}
 	
-	public function matchQuery($query) {
+	public function matchQuery($query) {  
+	    // sort collected routes by priority
+		usort($this->_routes, array("Route", "cmpRoutes"));
+	 
 		foreach ($this->_routes as $route) {
-			$a = array_pop($route);
-			if ($a->matches($query)) {
-				return $a->requestParams();
+			if ($route->matches($query)) {   
+				return $route->requestParams();
 			}
 		}
 	}

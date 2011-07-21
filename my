@@ -1,13 +1,13 @@
-#!/bin/env php
+#!/usr/bin/env php
 <?php
 
-define("CMS_ROOT", dirname(__FILE__));
-define('myCONTEXT', 'CLI');
+define("CMS_ROOT", dirname(__FILE__));    
+putenv("myEnv=CLI");
 
-require_once(CMS_ROOT.'Framework/Classes/Bootstrap/Bootstrap.php');
+require_once(CMS_ROOT.'/Framework/Classes/Bootstrap/Bootstrap.php');
 
-Framework_Classes_Bootstrap_Bootstrap::getInstance()
-	->injectConfig(CMS_ROOT."Framwork/Meta/config.php")
+Bootstrap::getInstance()
+	->injectConfig(CMS_ROOT."/Framework/Meta/config.php")
 	->startMvc();
 
 ?>

@@ -5,7 +5,8 @@ $config = array(
 		"action"	=>	"hellomoto",
 	),                                 
 	"routes"	=> array(
-		"standard"	=>	array(
+		"standard"	=>	array(               
+			"priority"	=>	0,
 			"pattern"	=>	"/blog/:name",
 			"requestParams"	=>	array(
 				'module' 	=> 'blog', 

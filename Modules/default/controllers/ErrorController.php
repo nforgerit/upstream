@@ -1,7 +1,6 @@
 <?php
-$GLOBALS["L"]->load("abstractPageController");
 
-class ErrorController extends AbstractPageController {   
+class ErrorController {   
    
 	public function __construct() {
 		echo "<h6>Ooops.. obviously an error has occured </h6>";

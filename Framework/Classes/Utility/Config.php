@@ -16,8 +16,8 @@ class Config {
 	}     
 	
 	public function injectConfig($config) {
-		$this->_config = $config;   
-		
+		$this->_config = $config;      
+
 		return self::$_instance;
 	}                     
 	

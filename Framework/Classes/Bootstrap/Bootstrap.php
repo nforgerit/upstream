@@ -1,6 +1,6 @@
 <?php
 
-class Framework_Classes_Bootstrap_Bootstrap {
+class Bootstrap {
 	
 	private $_config;
 	private $_dispatcher;
@@ -10,28 +10,33 @@ class Framework_Classes_Bootstrap_Bootstrap {
 	private function __clone() {}
 	
 	public static function getInstance() {
-		if (NULL === self::$_instance) {
-			self::$_instance = new self;
+        $env = getenv('myEnv');
+		
+    	if ($env === 'Web') {
+	    	return self::_getWebInstance();
+		} else if ($env == 'CLI') {
+			return self::_getCliInstance();
+		} else {
+			throw new Exception("Cannot instantiate myCms for the given environment: ".$env);
 		}
-		return self::$_instance;
 	}
 
 	/**
-		Expects CMS config as (String) filepath or (Array) config
-		@param {String|Array} $config
+	 *   Expects CMS config as (String) filepath or (Array) config
+	 *   @param {String|Array} $config
 	 */
 	public function injectConfig($config) {
 		if (is_array($config)) {
 			$this->_config = $config;
 		}
 
-		$this->_config = Framework_Classes_Bootstrap_Bootstrap::parseConfigFile($config);  
-
+		$this->_config = Bootstrap::parseConfigFile($config);     
+		
 		return self::$_instance;
 	}
 	
 	/**
-		Starts the MVC process
+	 *   Starts the MVC process
 	 */
 	public function startMvc() {       
 		$this->_initAutoloader();  
@@ -39,8 +44,9 @@ class Framework_Classes_Bootstrap_Bootstrap {
 		
 		$GLOBALS["L"]->load("dispatcher");
 		$this->_dispatcher = Dispatcher::getInstance()
-			->init();  	 
-
+			//->preDispatch()
+			->init();
+			//->postDispatch();  	 
 	}           
 	
 	private function _initAutoloader() {
@@ -55,26 +61,36 @@ class Framework_Classes_Bootstrap_Bootstrap {
 	
 	private function _initGlobalConfig() {   
 		include_once(CMS_ROOT."/Framework/Classes/Utility/Config.php");
-		$GLOBALS["C"] = Config::getInstance();
-		
-		if (isset($this->_config)) {
-			$GLOBALS["C"]->injectConfig($this->_config);
-		}
+		$GLOBALS["C"] = Config::getInstance();     
+		$GLOBALS["C"]->injectConfig($this->_config);
 			   		
 		return self::$_instance;
-   	}
+   	}                     
+
+	private static function _getCliInstance() {
+		if (NULL === self::$_instance) {
+			self::$_instance = new self;
+		}
+	
+
+		return self::$_instance;
+	}
+	
+	private static function _getWebInstance() {
+		// currently web & cli are handled the same way!
+		return self::_getCliInstance();
+	}
 	
 	/**
-		Utility function for parsing .ini config files
-		@param	String	$filepath
-		@return Array
-	 */
-	public static function parseConfigFile($filepath) {
-		if (preg_match("/.*(.ini)$/i", $filepath)) {
-			return parse_ini_file($filepath, true);                
+	 *  Utility function for parsing .ini config files
+	 *  @param	String	$filepath
+	 *   @return Array
+	 **/
+	public static function parseConfigFile($config) {
+		if (preg_match("/.*(.ini)$/i", $config)) {
+			return parse_ini_file($config, true);                
 		}        
-		require_once($filepath);
-		return $config;
+		return require_once($config);
 	}
 
 }

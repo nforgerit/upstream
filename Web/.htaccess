@@ -1,4 +1,5 @@
 Options +FollowSymLinks +ExecCGI
+SetEnv myEnv Web
 
 <IfModule mod_rewrite.c>
   RewriteEngine On

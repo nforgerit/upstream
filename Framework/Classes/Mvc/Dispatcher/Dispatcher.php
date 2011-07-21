@@ -6,14 +6,15 @@ class Dispatcher {
 
 	private $_request;
 	private $_response;
-	private $_view;
+	private $_view;             
+	private $_config;
 
 	private static $_instance;
 	
 	private function __construct() {}
 	private function __clone() {}
 
-	public function getInstance() {
+	public static function getInstance() {
 		if (NULL === self::$_instance) {
 			self::$_instance = new self;
 		}
@@ -22,19 +23,18 @@ class Dispatcher {
 	}
 
 	public function init() {
-		$this->dispatch();
+		$this->_dispatch();
 
 		return self::$_instance;
 	}
 
-	private function dispatch() {
+	private function _dispatch() {
 		$requestPath = $this->getRequest()->uri();
 		                                
 		$module = $this->getRequest()->module();
 		$controller = $this->getRequest()->controller();
-		$action = $this->getRequest()->action();
-        
-		include_once(CMS_ROOT."modules/{$module}/controllers/{$controller}.php");   
+		$action = $this->getRequest()->action();          
+		include_once(CMS_ROOT."/modules/{$module}/controllers/{$controller}.php");   
 
 		$actionController = new $controller;
 		call_user_func(
