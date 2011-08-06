@@ -1,0 +1,41 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+#slideshow #slidesContainer {
+  margin:0 auto;
+  width:500px;
+  height:263px;
+  overflow:auto; /* allow scrollbar */
+  position:relative;
+}                                
+
+#slideshow #slidesContainer .slide {
+  margin:0 auto;
+  width:480px; /* reduce by 20 pixels to avoid horizontal scroll */
+  height:263px;
+}                        
+
+/**
+ * Slideshow controls style rules.
+ */
+.control {
+  display:block;
+  width:39px;
+  height:243px;
+  text-indent:-10000px;
+  position:absolute;
+  cursor: pointer;    
+  margin-top: 22px;
+}
+#leftControl {
+  top:0;
+  left:0;
+  background:transparent url(http://sixrevisions.com/demo/slideshow/img/control_left.jpg) no-repeat 0 0;
+}
+#rightControl {
+  top:0;
+  right:0;
+  background:transparent url(http://sixrevisions.com/demo/slideshow/img/control_right.jpg) no-repeat 0 0;
+}            

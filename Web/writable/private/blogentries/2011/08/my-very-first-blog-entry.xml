@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+
+<blogentry>
+	<title>My very first blog entry</title>   
+	<date>2011-07-22 01:26 pm</date>
+	
+	<para> 
+		<subtitle>Para1</subtitle>
+		<content>
+			This is a simple paragraph which has a subtitle
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</content>
+	</para>      
+	
+	<yt>          
+		<title>The coolest video ever</title>
+		<id>JMUNv3E81Ds</id>
+		<start>0</start>
+	</yt>       
+	
+	<para>    
+		<content> 
+			Isn't this cool? Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</content>        
+	</para>              
+	
+	<yt>
+		<title>And some academic stuff</title>
+		<id>1xSQlwWGT8M</id>
+	</yt>
+	
+	<para> 
+		<content>
+			This is a simple paragraph without a subtitle.
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</content>
+	</para>                     
+	
+	<para>
+		<subtitle>Another fancy sub-headline which seems to be quite long. Let's see what XSLT does with it and how it looks within the blog site. Looks okay, i guess!</subtitle>
+		<content> 
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</content>
+	</para>                    
+
+	<code>
+		<title>My Code!</title>
+		<listing><![CDATA[
+<?php
+class myFirstPHPClass extends myFirstAbstractPHPClass {
+	protected $property1;
+	protected $property2;
+	protected $property3;
+
+	// accessors for property1
+	public function get_property1() {
+		return $this->property1;
+	}
+	public function set_property1($property1) {
+		$this->property1 = $property1;
+	}
+
+	// accessors for property2
+	public function get_property2() {
+		return $this->property2;
+	}
+	public function set_property2($property2) {
+		$this->property2 = $property2;
+	}
+
+	// accessors for property3
+	public function get_property3() {
+		return $this->property3;
+	}
+	public function set_property3($property3) {
+		$this->property3 = $property3;
+	}
+}
+?>
+		]]></listing>	
+	</code>         
+	
+	<gist> 
+		<title>Check out this snippet on github!</title>
+		<id>1128906</id>      
+	</gist>
+	
+  <gallery>  
+		<title>My fancy image gallery!</title>
+		<pic>
+			<title>First pic!</title>
+			<file>/writable/public/images/pic1.jpg</file>
+		</pic>
+		<pic>
+			<title>Second pic!</title>
+			<file>/writable/public/images/pic2.jpg</file>
+		</pic>  
+		<pic>
+			<title>Third pic!</title>
+			<file>/writable/public/images/pic3.jpg</file>
+		</pic>
+	</gallery>   
+	
+	<para> 
+		<subtitle>This is a simple paragraph between an image gallery and a single image.</subtitle>
+		<content> 
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</content>
+	</para>
+
+	<pic>
+		<title>First pic!</title>
+		<file>/writable/public/images/pic1.jpg</file>
+	</pic>                                                    
+	
+	<pic>
+		<file>/writable/public/images/pic2.jpg</file>
+	</pic>                               
+	
+	<pic>
+		<title>Third pic!</title>
+		<file>/writable/public/images/pic3.jpg</file>
+	</pic>
+		  
+	<vimeo> 
+		<title>The radically new interface - TYPO3 5.0</title>
+		<id>8648219</id>
+	</vimeo>  
+</blogentry>
