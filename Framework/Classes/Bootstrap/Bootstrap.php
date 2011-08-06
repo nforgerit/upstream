@@ -1,4 +1,5 @@
-<?php
+<?php    
+namespace my\Bootstrap;
 
 class Bootstrap {
 	
@@ -17,7 +18,7 @@ class Bootstrap {
 		} else if ($env == 'CLI') {
 			return self::_getCliInstance();
 		} else {
-			throw new Exception("Cannot instantiate myCms for the given environment: ".$env);
+			throw new Exception("Cannot instantiate myCMS for the given environment: ".$env);
 		}
 	}
 
@@ -28,9 +29,9 @@ class Bootstrap {
 	public function injectConfig($config) {
 		if (is_array($config)) {
 			$this->_config = $config;
+		} else {
+			$this->_config = \my\Bootstrap\Bootstrap::parseConfigFile($config);     
 		}
-
-		$this->_config = Bootstrap::parseConfigFile($config);     
 		
 		return self::$_instance;
 	}
@@ -42,26 +43,26 @@ class Bootstrap {
 		$this->_initAutoloader();  
 		$this->_initGlobalConfig();  	              
 		
-		$GLOBALS["L"]->load("dispatcher");
-		$this->_dispatcher = Dispatcher::getInstance()
-			//->preDispatch()
-			->init();
-			//->postDispatch();  	 
+		$this->_dispatcher = \my\Mvc\Dispatcher::getInstance()
+			->preDispatch()
+			->init()
+			->postDispatch();  	 
 	}           
 	
 	private function _initAutoloader() {
 		include_once(CMS_ROOT."/Framework/Classes/Utility/Autoloader.php");
-		$GLOBALS["L"] = Autoloader::getInstance(); 
+		$autoloader = \my\Utility\Autoloader::getInstance();     
+
 		if (isset($this->_config)) {
-			$GLOBALS["L"]->injectClasses($this->_config["classes"]);
+			$autoloader->injectConfig($this->_config)   
+            	->register_autoload();
 		}
 		
 		return self::$_instance;
 	}               
 	
 	private function _initGlobalConfig() {   
-		include_once(CMS_ROOT."/Framework/Classes/Utility/Config.php");
-		$GLOBALS["C"] = Config::getInstance();     
+		$GLOBALS["C"] = \my\Utility\Config::getInstance();     
 		$GLOBALS["C"]->injectConfig($this->_config);
 			   		
 		return self::$_instance;
@@ -72,7 +73,6 @@ class Bootstrap {
 			self::$_instance = new self;
 		}
 	
-
 		return self::$_instance;
 	}
 	

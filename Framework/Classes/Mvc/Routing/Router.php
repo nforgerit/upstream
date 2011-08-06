@@ -1,16 +1,15 @@
-<?php
+<?php         
+namespace my\Mvc\Routing;
 
 class Router {
 	private $_routes;        
 	private $_defaultRoute;
 	
 	public function __construct () {
-		$this->_collectRouteConfigs();
+		$this->_collectRouteConfigs();     	
 	}
 
 	private function _collectRouteConfigs() {  
-		$GLOBALS["L"]->load("route");
-		
 		$this->_defaultRoute = $GLOBALS["C"]->getConfigSection("defaultRoute");
 		$REGISTERED_MODULES = $GLOBALS["C"]->getConfigSection("modules");     
         
@@ -40,7 +39,6 @@ class Router {
 			"controller"	=>	isset($this->_defaultRoute['controller']) ? $this->_defaultRoute['controller'] : "index",	
 			"action"		=>	isset($this->_defaultRoute['action']) ? $this->_defaultRoute['action'] : 'index',	
 		);   
-
 	}           
 	
 	public function getDefaultRoute() {
@@ -49,10 +47,10 @@ class Router {
 	
 	public function matchQuery($query) {  
 	    // sort collected routes by priority
-		usort($this->_routes, array("Route", "cmpRoutes"));
-	 
-		foreach ($this->_routes as $route) {
-			if ($route->matches($query)) {   
+		usort($this->_routes, array("\my\Mvc\Routing\Route", "cmpRoutes"));     
+
+		foreach ($this->_routes as $route) { 
+   			if ($route->matches($query)) {       
 				return $route->requestParams();
 			}
 		}

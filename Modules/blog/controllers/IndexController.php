@@ -1,34 +1,23 @@
-<?php
+<?php                  
+namespace my\blog;
 
-class IndexController {
+class IndexController extends \my\Mvc\AbstractPageController {
 
 	public $var1 = 'hello';
 	public $var2 = "moto";
 	
-	public function muhAction($params) {
+	public function muhAction() {
 		echo "MOOOOOOOHH";
-
-		echo "<pre>";
-		var_dump ($params);
-		echo "</pre>";
 	}
 	
-	public function indexAction($params) {
+	public function indexAction() {
 		echo "HOORAY!! WE'RE IN INDEX ACTION!";
 		
-		echo "This is my fancy new blog entry. YEAH!";
-
-		echo "<pre>";
-		var_dump ($params);
-		echo "</pre>";		
+		echo "This is my fancy new blog entry. YEAH!";   
 	}                     
 	
-	public function hellomotoAction($params) {
+	public function hellomotoAction() {
 		echo "In HelloMotoAction";
-		echo "<pre>";
-		var_dump ($params);
-		echo "</pre>";                
-		
 		echo "<pre>";
 			var_dump($GLOBALS["C"]->getConfigSection("defaultRoute"));
 			die("died in ".__METHOD__." -- line ".__LINE__);

@@ -1,7 +1,5 @@
-<?php
-
-// module,controller,action name: /[a-zA-Z0-9.-]/i
-// preparing a param: /:module/:controller/:action/:param1§INT/:param2§REGEXP[/^pre/i]/:param3§EMAIL/:param4§BOOLEAN
+<?php         
+namespace my\Mvc\Routing;
 
 class Route {
                               
@@ -33,7 +31,7 @@ class Route {
 		// whether the given query matches this routeObject    
 		
 		// 1) match uri divisions 
-		if (substr_count($query, '/') !== substr_count($this->_pattern, '/')) {
+		if ( (substr_count($query, '/') - substr_count($this->_pattern, '/')) > 1) {
 			return false;
 		}
 		
@@ -60,29 +58,30 @@ class Route {
 		);
 
 		$queryDivisions = explode('/', trim($query, '/'));
-		$patternDivisions = explode('/', trim($this->_pattern, '/'));   
+		$patternDivisions = explode('/', trim($this->_pattern, '/')); 
 
 		while (count($queryDivisions) > 0 && count($patternDivisions) > 0) {
 			$qDiv = array_shift($queryDivisions);
 			$pDiv = array_shift($patternDivisions);
-
-			// skip if pDiv is a constant
-			if (substr($pDiv, 0, 1) !== ":") continue;
-
-			// use pre-defined patterns from above
-			if (in_array($pDiv, array_keys($REGEX_TYPES))) {
-				$_pattern = $REGEX_TYPES[$pDiv];
-			}
-			// use the module's defined regexp patterns
-			else if (in_array($pDiv, array_keys($this->_requestParams['params']))) {
-				$_pattern = $this->_requestParams['params'][$pDiv];
-			}
-
-			// match the pattern and collect given params
-			if (! preg_match($_pattern, $qDiv)) { return false;	}
-			else {
-				$this->_requestParams[substr($pDiv,1)] = $qDiv;
-			} 
+                
+			// substr is a :variable that has to be matched
+			if (substr($pDiv, 0, 1) === ":") {
+	
+				// use pre-defined patterns from above
+				if (in_array($pDiv, array_keys($REGEX_TYPES))) {
+					$_pattern = $REGEX_TYPES[$pDiv];
+				}			
+				// use the module's defined regexp patterns
+				else if (in_array($pDiv, array_keys($this->_requestParams['params']))) {
+					$_pattern = $this->_requestParams['params'][$pDiv];
+				}
+				
+				if (isset($_pattern) && !preg_match($_pattern, $qDiv)) return false;
+				else $this->_requestParams['args'][substr($pDiv,1)] = $qDiv;   
+			}                                                       
+			
+			// both query and pattern part are constant 
+			else if ($pDiv !== $qDiv) return false;
 		}
 		
 		return true;

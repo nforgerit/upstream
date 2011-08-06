@@ -6,8 +6,7 @@ CONTENTS
 - for educational curiosity
 - as a reference of my e1337-skill0rz
 - low requirements on the server: PHP5 is sufficient
-- put away bureaucracy: GOOD naming instead of speaking naming; no
-  namespaces; you deserve the right to shoot yourself into your own feet;
+- put away bureaucracy: GOOD naming instead of speaking naming; you deserve the right to shoot yourself into your own feet;
 - important (thus often used) things should be global and shortly
   accessible:
   - class loader

@@ -1,4 +1,5 @@
-<?php
+<?php          
+namespace my\Utility;
 	
 class Config {
 	                      
